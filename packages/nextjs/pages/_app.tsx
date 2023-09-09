@@ -1,56 +1,58 @@
-import { useEffect, useState } from "react";
 import type { AppProps } from "next/app";
-import { RainbowKitProvider, darkTheme, lightTheme } from "@rainbow-me/rainbowkit";
+import GlobalProvider from "../context/GlobalContext";
+import "../styles/globals.css";
+import { RainbowKitProvider, connectorsForWallets, darkTheme, getDefaultWallets } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
-import NextNProgress from "nextjs-progressbar";
-import { Toaster } from "react-hot-toast";
-import { useDarkMode } from "usehooks-ts";
-import { WagmiConfig } from "wagmi";
-import { Footer } from "~~/components/Footer";
-import { Header } from "~~/components/Header";
-import { BlockieAvatar } from "~~/components/scaffold-eth";
-import { useNativeCurrencyPrice } from "~~/hooks/scaffold-eth";
-import { useGlobalState } from "~~/services/store/store";
-import { wagmiConfig } from "~~/services/web3/wagmiConfig";
-import { appChains } from "~~/services/web3/wagmiConnectors";
-import "~~/styles/globals.css";
+import { coinbaseWallet, injectedWallet, metaMaskWallet, walletConnectWallet } from "@rainbow-me/rainbowkit/wallets";
+import { WagmiConfig, configureChains, createConfig } from "wagmi";
+import { goerli, sepolia } from "wagmi/chains";
+import { publicProvider } from "wagmi/providers/public";
 
-const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
-  const price = useNativeCurrencyPrice();
-  const setNativeCurrencyPrice = useGlobalState(state => state.setNativeCurrencyPrice);
-  // This variable is required for initial client side rendering of correct theme for RainbowKit
-  const [isDarkTheme, setIsDarkTheme] = useState(true);
-  const { isDarkMode } = useDarkMode();
+const { chains, publicClient, webSocketPublicClient } = configureChains(
+  [sepolia, ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [goerli] : [])],
+  [publicProvider()],
+);
 
-  useEffect(() => {
-    if (price > 0) {
-      setNativeCurrencyPrice(price);
-    }
-  }, [setNativeCurrencyPrice, price]);
+// const { connectors } = getDefaultWallets({
+//   appName: 'Metro',
+//   projectId: '',
+//   chains,
+// });
+const connectors = connectorsForWallets([
+  {
+    groupName: "Recommended",
+    wallets: [
+      injectedWallet({ chains }),
+      metaMaskWallet({ projectId: "293ec0e04ef0b067e2fdbf402fcc2021", chains }),
+      coinbaseWallet({ appName: "Metro", chains }),
+      walletConnectWallet({ projectId: "293ec0e04ef0b067e2fdbf402fcc2021", chains }),
+    ],
+  },
+]);
 
-  useEffect(() => {
-    setIsDarkTheme(isDarkMode);
-  }, [isDarkMode]);
+const wagmiConfig = createConfig({
+  autoConnect: true,
+  connectors,
+  publicClient,
+  webSocketPublicClient,
+});
 
+export default function App({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig config={wagmiConfig}>
-      <NextNProgress />
       <RainbowKitProvider
-        chains={appChains.chains}
-        avatar={BlockieAvatar}
-        theme={isDarkTheme ? darkTheme() : lightTheme()}
+        chains={chains}
+        modalSize="compact"
+        theme={darkTheme({
+          accentColor: "#7b3fe4",
+          accentColorForeground: "white",
+          borderRadius: "medium",
+        })}
       >
-        <div className="flex flex-col min-h-screen">
-          <Header />
-          <main className="relative flex flex-col flex-1">
-            <Component {...pageProps} />
-          </main>
-          <Footer />
-        </div>
-        <Toaster />
+        <GlobalProvider>
+          <Component {...pageProps} />
+        </GlobalProvider>
       </RainbowKitProvider>
     </WagmiConfig>
   );
-};
-
-export default ScaffoldEthApp;
+}

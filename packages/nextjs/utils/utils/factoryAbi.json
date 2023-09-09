@@ -1,0 +1,78 @@
+[
+  { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": false, "internalType": "string", "name": "message", "type": "string" },
+      { "indexed": false, "internalType": "address", "name": "disco", "type": "address" }
+    ],
+    "name": "DiscoLogs",
+    "type": "event"
+  },
+  {
+    "inputs": [{ "internalType": "address", "name": "_user", "type": "address" }],
+    "name": "clppr",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "name", "type": "string" },
+      { "internalType": "uint256", "name": "unitPrice", "type": "uint256" }
+    ],
+    "name": "createDisco",
+    "outputs": [{ "internalType": "address", "name": "nDisco", "type": "address" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "discos",
+    "outputs": [
+      { "internalType": "string", "name": "name", "type": "string" },
+      { "internalType": "address", "name": "wallet", "type": "address" },
+      { "internalType": "address", "name": "admin", "type": "address" },
+      { "internalType": "uint256", "name": "unitPrice", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "address", "name": "newController", "type": "address" }],
+    "name": "replcController",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "retDiscos",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "string", "name": "name", "type": "string" },
+          { "internalType": "address", "name": "wallet", "type": "address" },
+          { "internalType": "address", "name": "admin", "type": "address" },
+          { "internalType": "uint256", "name": "unitPrice", "type": "uint256" }
+        ],
+        "internalType": "struct MetroFactory.Disco[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "to", "type": "address" },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" }
+    ],
+    "name": "withdrawETH_Met",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  { "stateMutability": "payable", "type": "receive" }
+]

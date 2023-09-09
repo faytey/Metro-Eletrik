@@ -1,0 +1,22 @@
+<svg width="31" height="48" viewBox="0 0 31 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g id="free Ethereum svg" clip-path="url(#clip0_166_9044)">
+    <g id="Group">
+      <path id="Vector"
+        d="M15.6646 0L15.3429 1.09353V32.8251L15.6646 33.1462L30.3941 24.4397L15.6646 0Z"
+        fill="#343434" />
+      <path id="Vector_2" d="M15.6647 0L0.935303 24.4397L15.6647 33.1464V17.7448V0Z" fill="#8C8C8C" />
+      <path id="Vector_3"
+        d="M15.6647 35.9356L15.4834 36.1566V47.46L15.6647 47.9897L30.4029 27.2334L15.6647 35.9356Z"
+        fill="#3C3C3B" />
+      <path id="Vector_4" d="M15.6647 47.9887V35.9346L0.935303 27.2324L15.6647 47.9887Z"
+        fill="#8C8C8C" />
+      <path id="Vector_5" d="M15.6647 33.1464L30.3939 24.44L15.6647 17.7451V33.1464Z" fill="#141414" />
+      <path id="Vector_6" d="M0.935425 24.44L15.6646 33.1464V17.7451L0.935425 24.44Z" fill="#393939" />
+    </g>
+  </g>
+  <defs>
+    <clipPath id="clip0_166_9044">
+      <rect width="29.4676" height="48" fill="white" transform="translate(0.935303)" />
+    </clipPath>
+  </defs>
+</svg>

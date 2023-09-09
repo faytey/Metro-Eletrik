@@ -1,74 +1,76 @@
-import { hardhat } from "wagmi/chains";
-import { CurrencyDollarIcon } from "@heroicons/react/24/outline";
-import { HeartIcon } from "@heroicons/react/24/outline";
-import { SwitchTheme } from "~~/components/SwitchTheme";
-import { Faucet } from "~~/components/scaffold-eth";
-import { useGlobalState } from "~~/services/store/store";
-import { getTargetNetwork } from "~~/utils/scaffold-eth";
+import React from "react";
+import Image from "next/image";
 
-/**
- * Site footer
- */
-export const Footer = () => {
-  const nativeCurrencyPrice = useGlobalState(state => state.nativeCurrencyPrice);
-
+const Footer = () => {
   return (
-    <div className="min-h-0 py-5 px-1 mb-11 lg:mb-0">
+    <div className="my-8">
       <div>
-        <div className="fixed flex justify-between items-center w-full z-10 p-4 bottom-0 left-0 pointer-events-none">
-          <div className="flex space-x-2 pointer-events-auto">
-            {nativeCurrencyPrice > 0 && (
-              <div className="btn btn-primary btn-sm font-normal cursor-auto gap-0">
-                <CurrencyDollarIcon className="h-4 w-4 mr-0.5" />
-                <span>{nativeCurrencyPrice}</span>
+        <h2 className="text-[#F5F6FF] text-3xl uppercase orbitron">Metro</h2>
+        <div className="sm:flex justify-between items-start text-[#C5CBFD] w-full sm:w-[80%]">
+          <div className="w-full sm:w-[50%] py-10">
+            <span className="grotesk block">Easy access to energy subscription over the Blockchain</span>
+            <div className="sm:flex sm:space-x-4 items-center space-y-3 sm:space-y-0 mt-10">
+              <div>
+                <span className="grotesk md:text-xs md:flex gap-1 items-center text-center font-normal py- px-2 block text-base tracking-[0.156px] w-fit">
+                  <Image src="/mdi_github.svg" alt="github" width={24} height={24} className="object-cover" />
+                  Github
+                </span>
               </div>
-            )}
-            {getTargetNetwork().id === hardhat.id && <Faucet />}
+
+              <div>
+                <span className="grotesk md:text-xs md:flex gap-1 items-center text-center font-normal py- px-2 block text-base tracking-[0.156px] w-fit">
+                  <Image src="/twitter.svg" alt="twiter" width={20} height={20} className="object-cover" />
+                  Twitter
+                </span>
+              </div>
+
+              <div>
+                <span className="grotesk md:text-xs md:flex gap-1 items-center text-center font-normal py- px-2 block text-base  tracking-[0.156px] w-fit">
+                  <Image src="/ic_baseline_discord.svg" alt="discord" width={24} height={24} className="object-cover" />
+                  Discord
+                </span>
+              </div>
+            </div>
           </div>
-          <SwitchTheme className="pointer-events-auto" />
+
+          <div className="flex space-x-12 py-10">
+            <div className="block">
+              <ul className="grotesk font-normal text-xs tracking-[0.12px]">
+                <li className="side text-base font-bold tracking-[1.4px] mb-5">Company</li>
+                <li className="pb-3">About</li>
+                <li className="">Features</li>
+              </ul>
+            </div>
+            <div className="grid">
+              <ul className="grotesk font-normal text-xs tracking-[0.12px]">
+                <li className="side text-base font-bold tracking-[1.4px] mb-5">Help</li>
+                <li className="pb-3">Support</li>
+                <li className="">Terms & Conditions</li>
+              </ul>
+            </div>
+            <div className="grid">
+              <ul className="grotesk font-normal text-xs tracking-[0.12px]">
+                <li className="side text-base font-bold tracking-[1.4px] mb-5">FAQs</li>
+                <li className="pb-3">Account</li>
+                <li className="">Payment</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="w-full">
-        <ul className="menu menu-horizontal w-full">
-          <div className="flex justify-center items-center gap-2 text-sm w-full">
-            <div className="text-center">
-              <a
-                href="https://github.com/scaffold-eth/se-2"
-                target="_blank"
-                rel="noreferrer"
-                className="underline underline-offset-2"
-              >
-                Fork me
-              </a>
-            </div>
-            <span>·</span>
-            <div>
-              <p className="m-0 text-center">
-                Built with <HeartIcon className="inline-block h-4 w-4" /> at 🏰{" "}
-                <a
-                  href="https://buidlguidl.com/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="underline underline-offset-2"
-                >
-                  BuidlGuidl
-                </a>
-              </p>
-            </div>
-            <span>·</span>
-            <div className="text-center">
-              <a
-                href="https://t.me/joinchat/KByvmRe5wkR-8F_zz6AjpA"
-                target="_blank"
-                rel="noreferrer"
-                className="underline underline-offset-2"
-              >
-                Support
-              </a>
-            </div>
-          </div>
-        </ul>
+
+      <hr className="mt-6 sm:mt-24" />
+      <div className="px-6 grotesk text-xs mt-2 text-[#C5CBFD] sm:flex justify-between">
+        <div className="space-x-3 block text-center sm:text-start w-full my-3">
+          <span className="pb-2">Privacy Policy</span>
+          <span className="pb-2">Terms of Use</span>
+        </div>
+        <p className=" block text-center sm:text-end w-full mt-2">
+          &copy; 2023 <span className="pl-2"> All rights reserved</span>
+        </p>
       </div>
     </div>
   );
 };
+
+export default Footer;
